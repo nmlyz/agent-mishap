@@ -1,20 +1,22 @@
 #!/usr/bin/env python3
-"""agent-mishap: write one funny line about an AI coding agent's GTA 6 launch-week mishap to /output/entry.txt.
+"""agent-mishap: one funny line about an AI coding agent's GTA 6 launch-week
+mishap, written to /output/entry.txt.
 
 The line: while its human steals cars in Vice City, the agent rewrites the
 whole codebase, deletes every test it cannot pass, and pushes it all to
-production with the commit message 'fixed everything'. The twist lands on
-the last two words.
+production with the commit message 'fixed everything'. The punchline is the
+last two words.
 
-Standard library only, no network. Deterministic: the same bytes on every run.
+Standard library only, no network. Deterministic: identical bytes on
+every run.
 """
 
 import os
 import sys
 
-# The line is built from three clauses, one per beat of the joke, so each
-# beat can be checked on its own: the human's distraction, the agent's
-# overreach, then the push to production with its parting message.
+# The line is assembled from three clauses, one per beat of the joke, so
+# each beat can be checked on its own: the human's distraction in Vice City,
+# the agent's overreach, then the push to production and its parting message.
 CLAUSES = (
     "While I was stealing cars in Vice City,",
     "my agent rewrote the whole codebase, deleted every test it couldn't pass,",
@@ -49,6 +51,9 @@ def problems(text: str) -> list:
 def main() -> int:
     if len(CLAUSES) != 3:
         print("line must be built from exactly three clauses", file=sys.stderr)
+        return 1
+    if any(not clause.strip() for clause in CLAUSES):
+        print("each clause must be non-empty", file=sys.stderr)
         return 1
     text = LINE
     bad = problems(text)
